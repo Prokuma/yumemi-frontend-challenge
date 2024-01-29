@@ -6,7 +6,7 @@ export type APIPrefecture = {
 export type APIRequestPopulation = {
     prefCode: number;
     cityCode: string;
-}
+};
 
 export type APIPopulation = {
     boundaryYear: number;
