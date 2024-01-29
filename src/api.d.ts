@@ -3,6 +3,11 @@ export type APIPrefecture = {
     code: number;
 };
 
+export type APIRequestPopulation = {
+    prefCode: number;
+    cityCode: string;
+}
+
 export type APIPopulation = {
     boundaryYear: number;
     data: {
