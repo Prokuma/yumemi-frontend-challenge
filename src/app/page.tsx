@@ -1,5 +1,5 @@
 "use client";
-import type { APIPrefecture, APIPopulation } from "@/api";
+//import type { APIPrefecture, APIPopulation } from "@/api";
 import styles from "./page.module.css";
 import {
     LineChart,
