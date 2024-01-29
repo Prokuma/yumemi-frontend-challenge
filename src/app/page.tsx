@@ -1,95 +1,110 @@
-import Image from "next/image";
+"use client";
+import type { APIPrefecture, APIPopulation } from "@/api";
 import styles from "./page.module.css";
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+} from "recharts";
+const data = [
+    {
+        year: 2000,
+        hokkaido: 1000,
+        aomori: 2200,
+    },
+    {
+        year: 2010,
+        hokkaido: 4000,
+        aomori: 2400,
+    },
+    {
+        year: 2020,
+        hokkaido: 4200,
+        aomori: 2100,
+    },
+    {
+        year: 2030,
+        hokkaido: 1200,
+        aomori: 2200,
+    },
+];
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    return (
+        <main className={styles.main}>
+            <div className={styles.title}>
+                <h1>人口推移</h1>
+            </div>
+            <div className={styles.grid}>
+                <h3>都道府県</h3>
+            </div>
+            <div className={styles.grid}>
+                <div>
+                    <input
+                        type="checkbox"
+                        name="prefecture"
+                        value="hokkaido"
+                        id="hokkaido"
+                    />
+                    <label htmlFor="hokkaido">北海道</label>
+                </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        name="prefecture"
+                        value="aomori"
+                        id="aomori"
+                    />
+                    <label htmlFor="aomori">青森</label>
+                </div>
+            </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+            <div className={styles.center}>
+                <h3>総人口</h3>
+            </div>
+            <div className={styles.center}>
+                <LineChart
+                    width={1000}
+                    height={700}
+                    data={data}
+                    margin={{
+                        top: 5,
+                        right: 10,
+                        left: 10,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid />
+                    <XAxis dataKey="year" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend
+                        width={100}
+                        wrapperStyle={{
+                            top: 40,
+                            right: 20,
+                            border: "1px solid #d5d5d5",
+                            borderRadius: 3,
+                        }}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="hokkaido"
+                        stroke="#8884d8"
+                        name="北海道"
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="aomori"
+                        stroke="#82ca9d"
+                        name="青森"
+                    />
+                </LineChart>
+            </div>
+        </main>
+    );
 }

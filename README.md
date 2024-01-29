@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+株式会社ゆめみのフロントエンド課題プロジェクト。
 
 ## Getting Started
-
-First, run the development server:
+開発モード
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+テスト
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run test
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+ビルド
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 構成
+本アプリケーションは、SPA(Single Page Application)である。
+また、1ページに全てのコンテンツを表示し、ページ遷移を行わない。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+しかし、パーツとして分けた方がいいと思われる部分は、コンポーネントとして分けた方が望ましい。
+ページは、将来はこのように分けようとしている。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- ページ（下記のコンポーネントを組み合わせたもの）
+- 都道府県選択コンポーネント
+- 表示切り替えコンポーネント
+- 折れ線グラフコンポーネント
 
-## Deploy on Vercel
+RESES APIを用いるための型及びAPIからの情報取得も、別ファイルとして分ける計画である。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- APIで用いる型の定義
+- APIを叩く関数
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+の2つを作成する予定である。
+
+## 使用技術
+下記のようなライブラリ・フレームワークを用いる。
+なお、言語はTypeScriptを用いる。
+
+- Next.js
+- React.js
+- Jest(テスト)
+
+## 開発の進め方
+個人開発だが、課題にチーム開発を意識することと書いてあるので、チーム開発を意識した進め方にしたい。
+そのため、各機能追加等は、issueを発行し、別途ブランチを切って開発を行うことを前提とする。
+ブランチ名は、`issue/番号`か、そのissueが実装しようとするもの（`implement_api`など）とする。
+`develop`ブランチなどは、規模から冗長になるだけであり、今回は採用しない。
