@@ -9,11 +9,8 @@ import ResizeObserverModule from "resize-observer-polyfill";
 import "@testing-library/jest-dom";
 import PopulationLineGraph from "../app/graph";
 import { APIPopulation } from "../api.d";
-import {
-  getPrefectures,
-  getPopulationComposition,
-  convertPopulationCompositionToChartDataset,
-} from "../api";
+import { getPrefectures, getPopulationComposition } from "../api";
+import { convertPopulationCompositionToChartDataset } from "../utils";
 
 global.ResizeObserver = ResizeObserverModule;
 
