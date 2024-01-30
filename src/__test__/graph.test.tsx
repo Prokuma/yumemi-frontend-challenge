@@ -6,6 +6,7 @@ import { render, screen } from "@testing-library/react";
 import setupEnv from "./setupEnv";
 import "cross-fetch/polyfill";
 import ResizeObserverModule from "resize-observer-polyfill";
+import "@testing-library/jest-dom";
 import PopulationLineGraph from "../app/graph";
 import { APIPopulation } from "../api.d";
 import {
