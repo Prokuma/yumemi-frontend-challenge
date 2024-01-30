@@ -6,7 +6,7 @@ import { render, screen } from "@testing-library/react";
 import Home from "../app/page";
 
 describe("Rendering", () => {
-    it("should render the heading", () => {
-        render(<Home />);
-    });
+  it("should render the heading", () => {
+    render(<Home />);
+  });
 });

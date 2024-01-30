@@ -1,21 +1,21 @@
 export type APIPrefecture = {
-    name: string;
-    code: number;
+  prefName: string;
+  prefCode: number;
 };
 
 export type APIRequestPopulation = {
-    prefCode: number;
-    cityCode: string;
+  prefCode: number;
+  cityCode: string;
 };
 
 export type APIPopulation = {
-    boundaryYear: number;
+  boundaryYear: number;
+  data: {
+    label: string;
     data: {
-        label: string;
-        data: {
-            year: number;
-            value: number;
-            rate?: number;
-        }[];
+      year: number;
+      value: number;
+      rate?: number;
     }[];
+  }[];
 };
