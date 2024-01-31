@@ -9,6 +9,7 @@ import { convertPopulationCompositionToChartDataset } from "@/utils";
 import DataTypeSelector from "./typeselector";
 
 export default function Home() {
+  const [loading, setLoading] = useState<boolean>(true);
   const [allPrefectures, setAllPrefectures] = useState<APIPrefecture[]>([]);
   const [alreadyFetchedPrefectures, setAlreadyFetchedPrefectures] = useState<
     APIPrefecture[]
@@ -62,10 +63,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (!loading) {
+      return;
+    }
     getPrefectures().then((prefecturesList) => {
       setAllPrefectures(prefecturesList);
+      setLoading(false);
     });
-  }, [allPrefectures]);
+  }, [allPrefectures, loading]);
 
   return (
     <main className={styles.main}>
