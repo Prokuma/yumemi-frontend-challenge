@@ -7,6 +7,10 @@ export function convertPopulationCompositionToChartDataset(
   var datasets: { [key: string]: any } = {};
   if (!populationCompositions || !prefectures) {
     return datasets;
+  } else if (populationCompositions.length !== prefectures.length) {
+    throw new Error(
+      "populationCompositions and prefectures must have the same length",
+    );
   }
   for (const i in populationCompositions) {
     const prefName = prefectures[i].prefName;

@@ -11,55 +11,56 @@ import DataTypeSelector from "./typeselector";
 export default function Home() {
   const [loading, setLoading] = useState<boolean>(true);
   const [allPrefectures, setAllPrefectures] = useState<APIPrefecture[]>([]);
-  const [alreadyFetchedPrefectures, setAlreadyFetchedPrefectures] = useState<
-    APIPrefecture[]
-  >([]);
   const [selectedPrefectures, setSelectedPrefectures] = useState<
     APIPrefecture[]
   >([]);
-  const [selectedPopulationCompositions, setSelectedPopulationCompositions] =
-    useState<APIPopulation[]>([]);
-  const [populationCompositions, setPopulationCompositions] = useState<
-    APIPopulation[]
-  >([]);
+  const [convertedDataset, setConvertedDataset] = useState<any>({});
   const [selectedDataType, setSelectedDataType] = useState<string>("総人口");
+
+  var alreadyFetchedPrefectures: APIPrefecture[] = [];
+  var populationCompositions: APIPopulation[] = [];
 
   const labels = ["総人口", "年少人口", "生産年齢人口", "老年人口"];
 
-  const selectedPrefecturesChanged = (checkedPrefectures: APIPrefecture[]) => {
-    setSelectedPrefectures(checkedPrefectures);
+  const selectedPrefecturesChanged = async (
+    checkedPrefectures: APIPrefecture[],
+  ) => {
     if (checkedPrefectures.length === 0) {
       return;
     }
+
     for (const checkedPrefecture of checkedPrefectures) {
       if (alreadyFetchedPrefectures.includes(checkedPrefecture)) {
         continue;
       }
-      getPopulationComposition({
+      const populationComposition = await getPopulationComposition({
         prefCode: checkedPrefecture.prefCode,
         cityCode: "-",
-      }).then((populationComposition) => {
-        setPopulationCompositions([
-          ...populationCompositions,
-          populationComposition,
-        ]);
-        setAlreadyFetchedPrefectures([
-          ...alreadyFetchedPrefectures,
-          checkedPrefecture,
-        ]);
       });
+      populationCompositions.push(populationComposition);
+      alreadyFetchedPrefectures.push(checkedPrefecture);
     }
-    const newSelectedPopulationCompositions = [];
-    for (const i in alreadyFetchedPrefectures) {
-      for (const checkedPrefecture of checkedPrefectures) {
+
+    const selectedPopulationCompositions: APIPopulation[] = [];
+    for (const checkedPrefecture of checkedPrefectures) {
+      for (const i in alreadyFetchedPrefectures) {
         if (
           alreadyFetchedPrefectures[i].prefCode === checkedPrefecture.prefCode
         ) {
-          newSelectedPopulationCompositions.push(populationCompositions[i]);
+          selectedPopulationCompositions.push(populationCompositions[i]);
         }
       }
     }
-    setSelectedPopulationCompositions(newSelectedPopulationCompositions);
+
+    setConvertedDataset(() => {
+      return convertPopulationCompositionToChartDataset(
+        selectedPopulationCompositions,
+        checkedPrefectures,
+      );
+    });
+    setSelectedPrefectures(() => {
+      return checkedPrefectures;
+    });
   };
 
   useEffect(() => {
@@ -97,13 +98,10 @@ export default function Home() {
         />
       </div>
       <div className={styles.center}>
-        {populationCompositions.length > 0 ? (
+        {selectedPrefectures.length > 0 ? (
           <PopulationLineGraph
             label={selectedDataType}
-            data={convertPopulationCompositionToChartDataset(
-              selectedPopulationCompositions,
-              selectedPrefectures,
-            )}
+            data={convertedDataset}
             prefectures={selectedPrefectures}
           />
         ) : (
