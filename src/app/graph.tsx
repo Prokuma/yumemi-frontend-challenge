@@ -21,7 +21,12 @@ interface State {}
 export default class PopulationLineGraph extends Component<Props, State> {
   render() {
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer
+        width="100%"
+        height="100%"
+        minWidth={400}
+        minHeight={400}
+      >
         <LineChart
           data={this.props.data[this.props.label]}
           margin={{

@@ -18,13 +18,18 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
     };
   }
 
-  handleCheck(prefecture: APIPrefecture) {
+  handleCheck(e: React.ChangeEvent<HTMLInputElement>) {
     const checkedPrefectures = this.state.checkedPrefectures;
-    const index = checkedPrefectures.indexOf(prefecture);
+    const index = checkedPrefectures.findIndex((prefecture) => {
+      return prefecture.prefCode === parseInt(e.target.id);
+    });
+
     if (index > -1) {
       checkedPrefectures.splice(index, 1);
     } else {
-      checkedPrefectures.push(prefecture);
+      checkedPrefectures.push(
+        this.props.prefectures[parseInt(e.target.id) - 1],
+      );
     }
     this.setState({ checkedPrefectures: checkedPrefectures });
     this.props.onChange(checkedPrefectures);
@@ -40,8 +45,7 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
                 type="checkbox"
                 id={prefecture.prefCode.toString()}
                 name={prefecture.prefName}
-                value={prefecture.prefName}
-                onChange={() => this.handleCheck(prefecture)}
+                onChange={(e) => this.handleCheck(e)}
               />
               <label htmlFor={prefecture.prefCode.toString()}>
                 {prefecture.prefName}

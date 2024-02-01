@@ -2,11 +2,8 @@
  * @jest-environment jsdom
  */
 import "cross-fetch/polyfill";
-import {
-  getPrefectures,
-  getPopulationComposition,
-  convertPopulationCompositionToChartDataset,
-} from "../api";
+import { getPrefectures, getPopulationComposition } from "../api";
+import { convertPopulationCompositionToChartDataset } from "../utils";
 import setupEnv from "./setupEnv";
 
 describe("getPrefectures", () => {
