@@ -1,6 +1,7 @@
 "use client";
 import { APIPrefecture } from "@/api.d";
 import React, { Component } from "react";
+import styles from "./page.module.css";
 
 interface Props {
   prefectures: APIPrefecture[];
@@ -37,17 +38,17 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <div className={styles.grid}>
         {this.props.prefectures.map((prefecture, index) => {
           return (
-            <div key={index}>
+            <div key={index} className="checkitem">
               <input
                 type="checkbox"
                 id={prefecture.prefCode.toString()}
                 name={prefecture.prefName}
                 onChange={(e) => this.handleCheck(e)}
               />
-              <label htmlFor={prefecture.prefCode.toString()}>
+              <label htmlFor={prefecture.prefCode.toString()} className="checkbox">
                 {prefecture.prefName}
               </label>
             </div>
