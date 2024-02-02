@@ -8,6 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -25,7 +26,7 @@ export default class PopulationLineGraph extends Component<Props, State> {
         width="100%"
         height="100%"
         minWidth={400}
-        minHeight={400}
+        minHeight={600}
       >
         <LineChart
           data={this.props.data[this.props.label]}
@@ -51,6 +52,16 @@ export default class PopulationLineGraph extends Component<Props, State> {
             );
           })}
           <Tooltip />
+          <Legend
+            width={100}
+            wrapperStyle={{
+              top: 20,
+              right: 40,
+              backgroundColor: "#f5f5f5",
+              border: "1px solid #d5d5d5",
+              borderRadius: 3,
+            }}
+          />
         </LineChart>
       </ResponsiveContainer>
     );

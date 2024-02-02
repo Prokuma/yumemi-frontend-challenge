@@ -76,12 +76,12 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.title}>
-        <h1>人口推移</h1>
+        <h1>人口推移グラフ</h1>
       </div>
-      <div className={styles.grid}>
-        <h3>都道府県</h3>
+      <div className={styles.content}>
+        <h3>都道府県リスト</h3>
       </div>
-      <div className={styles.grid}>
+      <div className={styles.content}>
         {allPrefectures.length > 0 ? (
           <PrefecturesCheckBoxes
             prefectures={allPrefectures}
@@ -91,13 +91,13 @@ export default function Home() {
           <p>都道府県を取得中</p>
         )}
       </div>
-      <div className={styles.center}>
+      <div className={styles.content}>
         <DataTypeSelector
           labels={labels}
           onChange={(label) => setSelectedDataType(label)}
         />
       </div>
-      <div className={styles.center}>
+      <div className={styles.content}>
         {selectedPrefectures.length > 0 ? (
           <PopulationLineGraph
             label={selectedDataType}
