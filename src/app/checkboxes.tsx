@@ -48,7 +48,10 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
                 name={prefecture.prefName}
                 onChange={(e) => this.handleCheck(e)}
               />
-              <label htmlFor={prefecture.prefCode.toString()} className="checkbox">
+              <label
+                htmlFor={prefecture.prefCode.toString()}
+                className="checkbox"
+              >
                 {prefecture.prefName}
               </label>
             </div>

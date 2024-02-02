@@ -52,7 +52,16 @@ export default class PopulationLineGraph extends Component<Props, State> {
             );
           })}
           <Tooltip />
-          <Legend width={100} wrapperStyle={{top:20, right:40, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3}} />
+          <Legend
+            width={100}
+            wrapperStyle={{
+              top: 20,
+              right: 40,
+              backgroundColor: "#f5f5f5",
+              border: "1px solid #d5d5d5",
+              borderRadius: 3,
+            }}
+          />
         </LineChart>
       </ResponsiveContainer>
     );
