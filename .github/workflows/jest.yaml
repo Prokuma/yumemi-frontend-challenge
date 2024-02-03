@@ -6,11 +6,6 @@ on:
       - main
       - test_ci
 
-defaults:
-  run:
-    shell: bash
-    working-directory: src/backend
-
 jobs:
   jest:
     name: Jest
