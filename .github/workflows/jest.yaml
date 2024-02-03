@@ -23,6 +23,6 @@ jobs:
         run: npm install
 
       - name: Run tests
-        env:
+        with:
           RESAS_API_KEY: $ {{ secrets.RESAS_API_KEY }}
         run: npm test
