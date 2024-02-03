@@ -84,8 +84,19 @@ input[type="checkbox"] {
   width: 5px;
 }
 
+.checkbox:disabled {
+  background: #a6a6a6;
+  border: 1px solid #8d8d8d;
+}
+
 input[type="checkbox"]:checked + .checkbox::after {
   opacity: 1;
+}
+
+input[type="checkbox"]:disabled {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 select {

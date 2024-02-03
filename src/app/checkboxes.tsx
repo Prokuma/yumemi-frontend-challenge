@@ -5,10 +5,11 @@ import styles from "./page.module.css";
 
 interface Props {
   prefectures: APIPrefecture[];
-  onChange: (checkedPrefectures: APIPrefecture[]) => void;
+  onChange: (checkedPrefectures: APIPrefecture[]) => Promise<void>;
 }
 interface State {
   checkedPrefectures: APIPrefecture[];
+  isDisabled: boolean;
 }
 
 export default class PrefecturesCheckBoxes extends Component<Props, State> {
@@ -16,10 +17,11 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
     super(props);
     this.state = {
       checkedPrefectures: [],
+      isDisabled: false,
     };
   }
 
-  handleCheck(e: React.ChangeEvent<HTMLInputElement>) {
+  async handleCheck(e: React.ChangeEvent<HTMLInputElement>) {
     const checkedPrefectures = this.state.checkedPrefectures;
     const index = checkedPrefectures.findIndex((prefecture) => {
       return prefecture.prefCode === parseInt(e.target.id);
@@ -33,7 +35,9 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
       );
     }
     this.setState({ checkedPrefectures: checkedPrefectures });
-    this.props.onChange(checkedPrefectures);
+    this.setState({ isDisabled: true });
+    await this.props.onChange(checkedPrefectures);
+    this.setState({ isDisabled: false });
   }
 
   render() {
@@ -44,6 +48,7 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
             <div key={index} className="checkitem">
               <input
                 type="checkbox"
+                disabled={this.state.isDisabled}
                 id={prefecture.prefCode.toString()}
                 name={prefecture.prefName}
                 onChange={(e) => this.handleCheck(e)}
@@ -57,6 +62,9 @@ export default class PrefecturesCheckBoxes extends Component<Props, State> {
             </div>
           );
         })}
+        <div className="checkitem">
+          {this.state.isDisabled ? "ロード中..." : "ロード完了"}
+        </div>
       </div>
     );
   }

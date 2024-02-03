@@ -52,15 +52,19 @@ export default function Home() {
       }
     }
 
-    setConvertedDataset(() => {
-      return convertPopulationCompositionToChartDataset(
-        selectedPopulationCompositions,
-        checkedPrefectures,
-      );
-    });
-    setSelectedPrefectures(() => {
-      return checkedPrefectures;
-    });
+    try {
+      setConvertedDataset(() => {
+        return convertPopulationCompositionToChartDataset(
+          selectedPopulationCompositions,
+          checkedPrefectures,
+        );
+      });
+      setSelectedPrefectures(() => {
+        return checkedPrefectures;
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
