@@ -1,10 +1,6 @@
 name: Jest
 
-on:
-  push:
-    branches:
-      - main
-      - test_ci
+on: push
 
 jobs:
   jest:
