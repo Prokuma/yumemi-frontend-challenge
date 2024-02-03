@@ -2,8 +2,9 @@ name: Jest
 
 on:
   push:
-    paths:
-      - "src/backend/**"
+    branches:
+      - main
+      - test_ci
 
 defaults:
   run:
