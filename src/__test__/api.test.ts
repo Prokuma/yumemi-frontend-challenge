@@ -120,7 +120,7 @@ describe("convertPopulationCompositionToChartDataset", () => {
         prefectures,
       );
     }).toThrowError(
-      "The length of populationCompositions and prefectures must be the same.",
+      "populationCompositions and prefectures must have the same length",
     );
   });
 });
