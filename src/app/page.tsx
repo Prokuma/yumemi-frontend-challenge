@@ -5,7 +5,7 @@ import PopulationLineGraph from "./graph";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { APIPopulation, APIPrefecture } from "@/api.d";
-import { convertPopulationCompositionToChartDataset } from "@/utils";
+import { convertPopulationCompositionToChartDataset } from "../utils";
 import DataTypeSelector from "./typeselector";
 
 export default function Home() {

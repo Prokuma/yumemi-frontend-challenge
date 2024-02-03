@@ -25,7 +25,7 @@ describe("Rendering", () => {
       },
     ];
     render(
-      <PrefecturesCheckBoxes prefectures={prefectures} onChange={() => {}} />,
+      <PrefecturesCheckBoxes prefectures={prefectures} onChange={async () => {}} />,
     );
   });
 
@@ -33,7 +33,7 @@ describe("Rendering", () => {
     await setupEnv();
     const prefectures = await getPrefectures();
     render(
-      <PrefecturesCheckBoxes prefectures={prefectures} onChange={() => {}} />,
+      <PrefecturesCheckBoxes prefectures={prefectures} onChange={async () => {}} />,
     );
   });
 
@@ -52,7 +52,7 @@ describe("Rendering", () => {
     render(
       <PrefecturesCheckBoxes
         prefectures={prefectures}
-        onChange={(checkedPrefectures) => {
+        onChange={async (checkedPrefectures) => {
           checked = checkedPrefectures;
         }}
       />,
@@ -73,7 +73,7 @@ describe("Rendering", () => {
     render(
       <PrefecturesCheckBoxes
         prefectures={prefectures}
-        onChange={(checkedPrefectures) => {
+        onChange={async (checkedPrefectures) => {
           checked = checkedPrefectures;
         }}
       />,
